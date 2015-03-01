@@ -1,10 +1,5 @@
-/*
- * A simple programme that will change the intensity of
- * an LED based  * on the pressure from a force sensor
- * 
- */
-
 int ledPin = 9;
+int forcePin = 0;
 void setup()
 {
   pinMode(ledPin, OUTPUT);
@@ -13,13 +8,13 @@ void setup()
 
 void loop()
 {
- int forcePinRaw = analogRead(forcePinRaw); 
+ int forcePinRaw = analogRead(forcePin); 
  Serial.print("forcePinRaw: ");
  Serial.println(forcePinRaw);
 
-int forcePin = map(forcePinRaw, 200, 505, 0, 255); 
+int forcePinMapped = map(forcePinRaw, 200, 505, 0, 255); 
 
- int forcePinConstrained = constrain(forcePin, 0, 255);
+ int forcePinConstrained = constrain(forcePinMapped, 0, 255);
  analogWrite(ledPin, 255-forcePinConstrained);
  delay(500);
 }
